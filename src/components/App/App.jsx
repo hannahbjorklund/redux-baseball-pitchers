@@ -1,36 +1,44 @@
 import {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
-  const [currentPitcher, setCurrentPitcher] = useState('Maud Nelson');
-  const [currentCatcher, setCurrentCatcher] = useState('Elston Howard');
-
-  const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
-  const [catcherList, setCatcherList] = useState(['Roy Campanella', 'Elston Howard', 'Kenji Jojima']);
   const [newPitcher, setNewPitcher] = useState('');
   const [newCatcher, setNewCatcher] = useState('');
+  const [currentPitcher, setCurrentPitcher] = useState('');
+  const [currentCatcher, setCurrentCatcher] = useState('');
+
+  const pitcherList = useSelector((store) => store.pitcherList);
+  const catcherList = useSelector((store) => store.catcherList);
+  
+  // Create a way to communicate with the store
+  const dispatch = useDispatch();
+
+  // Dispatch new pitcher to store
+  const handlePitcherSubmit = event => {
+    event.preventDefault();
+    dispatch({
+      type: 'ADD_PITCHER',
+      payload: newPitcher
+    })
+    setNewPitcher('');
+  };
 
   const handlePitcherNameChange = event => {
     setNewPitcher(event.target.value);
   };
 
-  // add new pitcher to the array. this will move to the pitcher reducer!
-  const handlePitcherSubmit = event => {
+  // Dispatch new catcher to store
+  const handleCatcherSubmit = event => {
     event.preventDefault();
-    // spread: give me everything in pitcherList, then add this new thing
-    setPitcherList([...pitcherList, newPitcher]);
-    setNewPitcher('');
+    dispatch({
+      type: 'ADD_CATCHER',
+      payload: newCatcher
+    })
+    setNewCatcher('');
   };
 
   const handleCatcherNameChange = event => {
     setNewCatcher(event.target.value);
-  };
-
-  // add new catcher to array. this will move to the catcher reducer!
-  const handleCatcherSubmit = event => {
-    event.preventDefault();
-    // spread: give me everything in catcherList, then add this new thing
-    setCatcherList([...catcherList, newCatcher]);
-    setNewCatcher('');
   };
 
   return (
