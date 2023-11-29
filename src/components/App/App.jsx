@@ -2,15 +2,14 @@ import {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TotalCatchers from '../TotalCatchers/TotalCatchers';
 import TotalPitchers from '../TotalPitchers/TotalPitchers';
+import CatcherList from '../CatcherList/CatcherList';
+import PitcherList from '../PitcherList/PitcherList';
 
 function App() {
   const [newPitcher, setNewPitcher] = useState('');
   const [newCatcher, setNewCatcher] = useState('');
   const [currentPitcher, setCurrentPitcher] = useState('');
   const [currentCatcher, setCurrentCatcher] = useState('');
-
-  const pitcherList = useSelector((store) => store.pitcherList);
-  const catcherList = useSelector((store) => store.catcherList);
   
   // Create a way to communicate with the store
   const dispatch = useDispatch();
@@ -60,15 +59,7 @@ function App() {
         />
         <button type="submit">Add Pitcher</button>
       </form>
-      <ul>
-        {pitcherList.map(pitcher => (
-          <li
-            onClick={() => setCurrentPitcher(pitcher)}
-          >
-            {pitcher}
-          </li>
-        ))}
-      </ul>
+      <PitcherList/>
       <h3>All Catchers</h3>
       <form onSubmit={handleCatcherSubmit}>
         <input
@@ -79,15 +70,7 @@ function App() {
         />
         <button type="submit">Add Catcher</button>
       </form>
-      <ul>
-        {catcherList.map(catcher => (
-          <li
-            onClick={() => setCurrentCatcher(catcher)}
-          >
-            {catcher}
-          </li>
-        ))}
-      </ul>
+      <CatcherList/>
     </div>
   );
 }
