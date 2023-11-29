@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import TotalCatchers from '../TotalCatchers/TotalCatchers';
+import TotalPitchers from '../TotalPitchers/TotalPitchers';
 
 function App() {
   const [newPitcher, setNewPitcher] = useState('');
@@ -46,8 +48,8 @@ function App() {
       <h1>Redux Baseball Pitchers</h1>
       <h2>On the Mound: {currentPitcher}</h2>
       <h2>Behind the Plate: {currentCatcher}</h2>
-      <div>Total Pitchers: {pitcherList.length}</div>
-      <div>Total Catchers: {catcherList.length}</div>
+      <TotalPitchers/>
+      <TotalCatchers/>
       <h3>All Pitchers</h3>
       <form onSubmit={handlePitcherSubmit}>
         <input
