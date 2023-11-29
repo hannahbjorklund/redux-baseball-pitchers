@@ -24,6 +24,14 @@ const catcherList = (state=[], action) => {
     return state;
 }
 
+const currentCatcher = (state='', action) => {
+    if(action.type === 'CURRENT_CATCHER'){
+        const curCatcher = action.payload;
+        return curCatcher;
+    }
+    return state;
+}
+
 // Creating our bucket
 const reduxStore = createStore(
     combineReducers({
